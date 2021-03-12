@@ -1,27 +1,32 @@
 package ru.job4j.todo.model;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.Objects;
 
+@Entity
+@Table(name = "item")
 public class Item {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String description;
-    private final Date date = new Date();
-    private final String created = changeFormatDate();
-    private boolean done;
 
-    public String changeFormatDate() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss  dd.MM.yyyy");
-        return dateFormat.format(created);
-    }
+    @Column(name = "description")
+    private String description;
+
+    @Column(name = "created")
+    private Timestamp created;
+
+    @Column(name = "done")
+    private boolean done;
 
     public Item() {
     }
 
-    public Item(String description, boolean done) {
+    public Item(String description) {
         this.description = description;
-        this.done = done;
+        this.created = new Timestamp(System.currentTimeMillis());
+        this.done = false;
     }
 
     public int getId() {
@@ -40,11 +45,7 @@ public class Item {
         this.description = description;
     }
 
-    public Date getDate() {
-        return date;
-    }
-
-    public String getCreated() {
+    public Timestamp getCreated() {
         return created;
     }
 
@@ -81,9 +82,8 @@ public class Item {
                 + ", description='"
                 + description
                 + '\''
-                + ", created='"
+                + ", created="
                 + created
-                + '\''
                 + ", done="
                 + done
                 + '}';

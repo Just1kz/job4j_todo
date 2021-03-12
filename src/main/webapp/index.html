@@ -24,9 +24,54 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
+<div><label></label></div>
+<h3>
+       Hello job4j, welcome to task-table
+</h3>
+<div><label></label></div>
 
-<h2>
-    Hello job4j, welcome to task-table
-</h2>
+<div>
+    <form class="form-horizontal">
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="description"><strong>Add Task</strong></label>
+            <div class="col-sm-5">
+                <textarea class="form-control" rows="1" id="description" placeholder="Enter description new Task..."></textarea>
+            </div>
+            <div><label></label></div>
+            <button type="button" class="btn btn-primary" style="background-color: rgb(100,100,250)" onclick="addItem()">Add Task</button>
+        </div>
+
+        <div class="form-group" >
+            <label class="control-label col-sm-2" for="description"><strong>Enter Description Task for done</strong></label>
+            <div class="col-sm-5">
+                <textarea class="form-control" rows="1" id="descriptionDone" placeholder="Enter description Task in table for done"></textarea>
+            </div>
+            <div><label></label></div>
+            <button type="button" class="btn btn-primary" style="background-color: rgb(100,100,250)" onclick="doneTask()">Done Task</button>
+        </div>
+
+        <div><label></label></div>
+        <div class="form-group">
+            <label class="btn btn-primary" for="filter" style="background-color: rgb(100,100,250)">Show all tasks</label>
+            <input type="checkbox" id="filter" name="filter" value="filter" checked onchange="filterItems()">
+        </div>
+
+    </form>
+</div>
+<div class="col-sm-offset-2">
+    <table class="table table-bordered table-hover table-sm" id="table">
+        <thead class="thead-inverse">
+        <tr>
+            <th>ID</th>
+            <th>Description</th>
+            <th>Created</th>
+            <th>Done</th>
+        </tr>
+        </thead>
+
+
+    </table>
+</div>
 </body>
 </html>

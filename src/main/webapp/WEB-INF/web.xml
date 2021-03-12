@@ -5,6 +5,44 @@
          http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
          version="2.4">
 
+    <servlet>
+        <servlet-name>TaskAddServlet</servlet-name>
+        <servlet-class>ru.job4j.todo.controller.TaskAddServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>TaskAddServlet</servlet-name>
+        <url-pattern>/add</url-pattern>
+    </servlet-mapping>
 
+    <servlet>
+        <servlet-name>TaskShowAllServlet</servlet-name>
+        <servlet-class>ru.job4j.todo.controller.TaskShowAllServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>TaskShowAllServlet</servlet-name>
+        <url-pattern>/showAll</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>TaskUpdateServlet</servlet-name>
+        <servlet-class>ru.job4j.todo.controller.TaskUpdateServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>TaskUpdateServlet</servlet-name>
+        <url-pattern>/update</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>TaskFilterServlet</servlet-name>
+        <servlet-class>ru.job4j.todo.controller.TaskFilterServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>TaskFilterServlet</servlet-name>
+        <url-pattern>/filter</url-pattern>
+    </servlet-mapping>
 
 </web-app>

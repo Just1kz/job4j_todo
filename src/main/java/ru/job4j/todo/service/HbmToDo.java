@@ -48,7 +48,7 @@ public class HbmToDo implements TaskService, AutoCloseable {
         List<Item> result = new ArrayList<>();
         try (Session session = sf.openSession()) {
             session.beginTransaction();
-            result = session.createQuery("FROM ru.job4j.todo.model.Item").list();
+            result = session.createQuery("FROM ru.job4j.todo.model.Item order by id").list();
             session.getTransaction().commit();
         } catch (Exception e) {
             logger.error(e.getMessage());

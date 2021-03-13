@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 public class TaskUpdateServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
-        String description = req.getParameter("description");
+        String description = req.getParameter("descriptionDone");
         HbmToDo.instOf().update(description);
     }
 }

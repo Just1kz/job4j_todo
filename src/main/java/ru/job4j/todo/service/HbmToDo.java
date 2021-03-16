@@ -38,7 +38,7 @@ public class HbmToDo implements TaskService, AutoCloseable {
             session.save(item);
             session.getTransaction().commit();
         } catch (Exception e) {
-            logger.error(e.getMessage());
+            logger.error(e.getMessage(), e);
         }
         return item;
     }
@@ -51,7 +51,7 @@ public class HbmToDo implements TaskService, AutoCloseable {
             result = session.createQuery("FROM ru.job4j.todo.model.Item order by id").list();
             session.getTransaction().commit();
         } catch (Exception e) {
-            logger.error(e.getMessage());
+            logger.error(e.getMessage(), e);
         }
         return result;
     }
@@ -64,7 +64,7 @@ public class HbmToDo implements TaskService, AutoCloseable {
             result = session.createQuery("FROM ru.job4j.todo.model.Item WHERE done = false order by id").list();
             session.getTransaction().commit();
         } catch (Exception e) {
-            logger.error(e.getMessage());
+            logger.error(e.getMessage(), e);
         }
         return result;
     }
@@ -82,7 +82,7 @@ public class HbmToDo implements TaskService, AutoCloseable {
             session.getTransaction().commit();
             return true;
         } catch (Exception e) {
-            logger.error(e.getMessage());
+            logger.error(e.getMessage(), e);
         }
         return false;
     }

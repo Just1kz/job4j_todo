@@ -12,5 +12,5 @@ public interface TaskService {
 
     List<Item> showFilter();
 
-    boolean update(String key);
+    void update(String key);
 }

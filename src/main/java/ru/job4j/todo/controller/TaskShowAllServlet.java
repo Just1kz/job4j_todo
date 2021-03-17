@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.util.List;
 
 public class TaskShowAllServlet extends HttpServlet {
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         List<Item> list = HbmToDo.instOf().findAll();

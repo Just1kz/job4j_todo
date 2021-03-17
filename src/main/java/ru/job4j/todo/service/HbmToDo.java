@@ -9,6 +9,8 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.job4j.todo.model.Item;
+import ru.job4j.todo.model.User;
+
 import java.util.List;
 import java.util.function.Function;
 
@@ -68,5 +70,20 @@ public class HbmToDo implements TaskService, AutoCloseable {
         this.tx(session -> session.createQuery("UPDATE Item SET done = true where description = :description")
                                             .setParameter("description", key)
                                             .executeUpdate());
+    }
+
+    @Override
+    public User createUser(String name, String email, String password) {
+        User user = new User(name, email, password);
+        this.tx(session -> session.save(user));
+        return user;
+    }
+
+    @Override
+    public User findByEmailAndPasswordUser(String email, String password) {
+        return (User) this.tx(session -> session.createQuery("FROM User where email = :email and password = :password")
+                                                                                                        .setParameter("email", email)
+                                                                                                        .setParameter("password", password)
+                                                                                                        .uniqueResult());
     }
 }

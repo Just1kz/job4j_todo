@@ -17,15 +17,27 @@ public class Item {
     @Column(name = "created")
     private Timestamp created;
 
+    @ManyToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "author_id")
+    private User user;
+
     @Column(name = "done")
     private boolean done;
 
     public Item() {
     }
 
+    public Item(String description, User user) {
+        this.description = description;
+        this.created = new Timestamp(System.currentTimeMillis());
+        this.user = user;
+        this.done = false;
+    }
+
     public Item(String description) {
         this.description = description;
         this.created = new Timestamp(System.currentTimeMillis());
+        this.user = null;
         this.done = false;
     }
 
@@ -55,6 +67,14 @@ public class Item {
 
     public void setDone(boolean done) {
         this.done = done;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override

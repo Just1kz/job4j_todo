@@ -1,19 +1,27 @@
+create table if not exists users(
+    idU serial primary key ,
+    name text,
+    email text,
+    password text
+);
+
 create table if not exists item(
 id serial primary key,
 description text,
 created timestamp default now(),
+author_id int not null references users(idU) default 1,
 done boolean default false
 );
+
+insert into users(name, email, password) VALUES ('Admin', 'abc@gmail.com', '123');
 
 insert into item(description) VALUES ('task1');
 insert into item(description) VALUES ('task2');
 insert into item(description) VALUES ('task3');
-insert into item(description) VALUES ('task4');
-insert into item(description) VALUES ('task5');
-insert into item(description) VALUES ('task6');
-insert into item(description) VALUES ('task7');
-insert into item(description) VALUES ('task8');
-insert into item(description) VALUES ('task9');
-insert into item(description) VALUES ('task10');
+
+
+SELECT item.id, item.description, item.created, u.name, item.done from item
+left join users u on u.idU = item.author_id;
+
 
 

@@ -66,6 +66,7 @@
             <th>ID</th>
             <th>Description</th>
             <th>Created</th>
+            <th>Author</th>
             <th>Done</th>
         </tr>
         </thead>
@@ -184,11 +185,13 @@
             let id = items[i]['id'];
             let description = items[i]['description'];
             let created = items[i]['created'];
+            let author = items[i]['user']['name'];
             let done = items[i]['done'];
             $("#table tr:last").after(
                 '<tr><td id="id">' + id + '</td>'
                 + '<td>' + description + '</td>'
                 + '<td>' + created + '</td>'
+                +  '<td>' + author + '</td>'
                 + '<td>' + done + '</td></tr>'
             );
         }

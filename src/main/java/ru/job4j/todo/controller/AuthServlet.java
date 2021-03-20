@@ -20,10 +20,11 @@ public class AuthServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
+        User user = new User(email, password);
         try {
-            User user = HbmToDo.instOf().findByEmailAndPasswordUser(email, password);
+            User user2 = HbmToDo.instOf().findByEmailAndPasswordUser(user);
             HttpSession sc = req.getSession();
-            sc.setAttribute("user", user);
+            sc.setAttribute("user", user2);
             resp.sendRedirect(req.getContextPath() + "/index.html");
         } catch (Exception e) {
             logger.error(e.getMessage(), e);

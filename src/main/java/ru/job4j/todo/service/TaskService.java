@@ -15,7 +15,7 @@ public interface TaskService {
 
     void update(String key);
 
-    void createUser(String name, String email, String password);
+    void createUser(User user);
 
-    User findByEmailAndPasswordUser(String email, String password);
+    User findByEmailAndPasswordUser(User user);
 }

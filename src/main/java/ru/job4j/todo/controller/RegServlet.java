@@ -1,5 +1,6 @@
 package ru.job4j.todo.controller;
 
+import ru.job4j.todo.model.User;
 import ru.job4j.todo.service.HbmToDo;
 
 import javax.servlet.ServletException;
@@ -16,12 +17,13 @@ public class RegServlet extends HttpServlet {
         String name = req.getParameter("name");
         String email = req.getParameter("email");
         String password = req.getParameter("password");
-        if (HbmToDo.instOf().findByEmailAndPasswordUser(email, password) != null) {
-            req.setAttribute("error", "Пользователь с указанным email уже зарегистрирован");
-            req.getRequestDispatcher("reg.html").forward(req, resp);
-        } else {
-            HbmToDo.instOf().createUser(name, email, password);
+        User user = new User(name, email, password);
+//        if (HbmToDo.instOf().findByEmailAndPasswordUser(email, password) != null) {
+//            req.setAttribute("error", "Пользователь с указанным email уже зарегистрирован");
+//            req.getRequestDispatcher("reg.html").forward(req, resp);
+//        } else {
+            HbmToDo.instOf().createUser(user);
             resp.sendRedirect(req.getContextPath() + "/login.html");
-        }
+//        }
     }
 }

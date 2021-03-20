@@ -73,10 +73,8 @@ public class HbmToDo implements TaskService, AutoCloseable {
     }
 
     @Override
-    public User createUser(String name, String email, String password) {
-        User user = new User(name, email, password);
-        this.tx(session -> session.save(user));
-        return user;
+    public void createUser(String name, String email, String password) {
+        this.tx(session -> session.save(new User(name, email, password)));
     }
 
     @Override

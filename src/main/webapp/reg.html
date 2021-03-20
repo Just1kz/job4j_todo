@@ -83,13 +83,11 @@
         if (validate()) {
             $.ajax({
                 method: "POST",
-                url: "http://localhost:8080/todo/reg",
+                url: "./reg",
                 data: {name : $("#name").val(), email : $("#eml").val(), password : $("#psw").val()},
                 dataType: 'json'
             });
-            window.location.href = "http://localhost:8080/todo/login.html"
         }
-        window.location.href = "http://localhost:8080/todo/login.html"
     }
 
     function validate() {

@@ -21,7 +21,7 @@ public class RegServlet extends HttpServlet {
             req.getRequestDispatcher("reg.html").forward(req, resp);
         } else {
             HbmToDo.instOf().createUser(name, email, password);
-            resp.sendRedirect(req.getContextPath() + "login.html");
+            resp.sendRedirect(req.getContextPath() + "/login.html");
         }
     }
 }

@@ -79,11 +79,10 @@
         if (validate()) {
             $.ajax({
                     method: "POST",
-                    url: "http://localhost:8080/todo/auth",
+                    url: "./auth",
                     data: {email : $("#eml").val(), password : $("#psw").val()},
                     dataType: 'json'
             });
-            window.location.href = "http://localhost:8080/todo/index.html"
         }
     }
 

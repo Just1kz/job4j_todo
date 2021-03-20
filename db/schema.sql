@@ -1,7 +1,7 @@
 create table if not exists users(
     idU serial primary key ,
     name text,
-    email text,
+    email text unique,
     password text
 );
 

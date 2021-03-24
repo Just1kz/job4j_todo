@@ -21,15 +21,14 @@ public class AuthServlet extends HttpServlet {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
         User user = new User(email, password);
-        try {
-            User user2 = HbmToDo.instOf().findByEmailAndPasswordUser(user);
+        User user2 = HbmToDo.instOf().findByEmailAndPasswordUser(user);
+        if (user2 != null && user2.getPassword().equals(password)) {
             HttpSession sc = req.getSession();
             sc.setAttribute("user", user2);
-            resp.sendRedirect(req.getContextPath() + "/index.html");
-        } catch (Exception e) {
-            logger.error(e.getMessage(), e);
+            resp.sendRedirect(req.getContextPath() + "/index.jsp");
+        } else {
             req.setAttribute("error", "Не верный email или password");
-            req.getRequestDispatcher("login.html").forward(req, resp);
+            req.getRequestDispatcher("login.jsp").forward(req, resp);
         }
     }
 }

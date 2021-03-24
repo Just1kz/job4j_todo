@@ -1,3 +1,5 @@
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -42,7 +44,7 @@
     <div class="row">
         <ul class="nav">
             <li class="nav-item">
-                <a class="nav-link" href="login.html"><h4>Войти</h4></a>
+                <a class="nav-link" href="<%=request.getContextPath()%>/login.jsp"><h4>Войти</h4></a>
             </li>
         </ul>
     </div>
@@ -58,8 +60,17 @@
             <div class="card-header">
                 Регистрация
             </div>
+            <div class="container">
+                <div class="row">
+                    <c:if test="${not empty error}">
+                        <div style="color:red; font-weight: bold; margin: 30px 0;">
+                                ${error}
+                        </div>
+                    </c:if>
+                </div>
+            </div>
             <div class="card-body">
-                <form action="./reg" method="post">
+                <form action="<%=request.getContextPath()%>/reg" method="post">
                     <div class="form-group">
                         <label>Имя</label>
                         <input type="text" class="form-control" name="name" id="name" placeholder="Введите Имя">

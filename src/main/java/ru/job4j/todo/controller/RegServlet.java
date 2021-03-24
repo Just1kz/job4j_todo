@@ -18,12 +18,12 @@ public class RegServlet extends HttpServlet {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
         User user = new User(name, email, password);
-//        if (HbmToDo.instOf().findByEmailAndPasswordUser(email, password) != null) {
-//            req.setAttribute("error", "Пользователь с указанным email уже зарегистрирован");
-//            req.getRequestDispatcher("reg.html").forward(req, resp);
-//        } else {
+        if (HbmToDo.instOf().findByEmailAndPasswordUser(user) != null) {
+            req.setAttribute("error", "Пользователь с указанным email уже зарегистрирован");
+            req.getRequestDispatcher("/reg.jsp").forward(req, resp);
+        } else {
             HbmToDo.instOf().createUser(user);
-            resp.sendRedirect(req.getContextPath() + "/login.html");
-//        }
+            resp.sendRedirect(req.getContextPath() + "/login.jsp");
+        }
     }
 }

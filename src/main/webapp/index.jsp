@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -27,22 +28,38 @@
         crossorigin="anonymous"></script>
 <div><label></label></div>
 <h3>
-    Hello job4j, welcome to task-table
+    _Hello job4j, welcome to task-table
 </h3>
 <div><label></label></div>
 
 <div>
-    <form class="form-horizontal">
-
+    <form class="form-horizontal" >
+<%--        action="<c:url value='/add'/>" method='POST'--%>
         <div class="form-group">
             <label class="control-label col-sm-2" for="description"><strong>Add Task</strong></label>
             <div class="col-sm-5">
                 <textarea class="form-control" rows="1" id="description" placeholder="Enter description new Task..."></textarea>
             </div>
             <div><label></label></div>
-            <button type="button" class="btn btn-primary" style="background-color: rgb(100,100,250)" onclick="addTask()">Add Task</button>
+            <div class="form-group row">
+                <label class="control-label col-sm-2" for="idCategories"><strong>__Select Category</strong></label>
+            </div>
+            <div class="col-sm-5">
+<%--                <select class="form-control" name="idCategories" id="idCategories" multiple>--%>
+<%--                    <c:forEach items="${allCategory}" var="category">--%>
+<%--                        <option value='<c:out value="${category.id}"/>'>${category.name}</option>--%>
+<%--                    </c:forEach>--%>
+<%--                </select>--%>
+                <select class="form-group custom-select" name="idCategories" id="idCategories" multiple>
+                    <option value="" selected></option>
+                </select>
+            </div>
+            <div><label></label></div>
+            <button type="button" class="btn btn-primary" style="background-color: rgb(100,100,250)" onclick=addTask() >Add Task</button>
         </div>
-
+</form>
+<%--        onclick="addTask()"--%>
+<form>
         <div class="form-group" >
             <label class="control-label col-sm-2" for="description"><strong>Enter Description Task for done</strong></label>
             <div class="col-sm-5">
@@ -51,6 +68,7 @@
             <div><label></label></div>
             <button type="button" class="btn btn-primary" style="background-color: rgb(100,100,250)" onclick="doneTask()">Done Task</button>
         </div>
+</form>
 
         <div><label></label></div>
         <div class="form-group">
@@ -58,7 +76,7 @@
             <input type="checkbox" id="filter" name="filter" value="filter" checked onchange="filterTask()">
         </div>
 
-    </form>
+
 </div>
 <div class="col-sm-offset-2">
     <table class="table table-bordered table-hover table-sm" id="table">
@@ -68,6 +86,7 @@
             <th>Description</th>
             <th>Created</th>
             <th>Author</th>
+            <th>Category</th>
             <th>Done</th>
         </tr>
         </thead>
@@ -82,7 +101,7 @@
             $.ajax({
                     method: "POST",
                     url: "http://localhost:8080/todo/add",
-                    data: {description : $("#description").val()},
+                    data: {description : $("#description").val(), idCategories : $("#idCategories").val()},
                     success: function ($data) {
                         console.log($data);
                     }
@@ -91,10 +110,11 @@
         }
         location.reload();
     }
+
     function validate() {
         let result = true;
         let answer = '';
-        let elements = [$("#description")];
+        let elements = [$("#description"), $("#idCategories")];
         for (let i = 0; i < elements.length; i++) {
             if (elements[i].val() === '') {
                 answer += elements[i].attr("placeholder") + "\n";
@@ -187,12 +207,14 @@
             let description = items[i]['description'];
             let created = items[i]['created'];
             let author = items[i]['user']['name'];
+            let category = items[i]['categoryList'][0]['name'];
             let done = items[i]['done'];
             $("#table tr:last").after(
                 '<tr><td id="id">' + id + '</td>'
                 + '<td>' + description + '</td>'
                 + '<td>' + created + '</td>'
                 +  '<td>' + author + '</td>'
+                +  '<td>' + category + '</td>'
                 + '<td>' + done + '</td></tr>'
             );
         }
@@ -208,6 +230,23 @@
             }
         }
     }
+</script>
+
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:8080/todo/allCategory",
+            dataType: 'json',
+            success: function (data) {
+                let category = "";
+                for (let i = 0; i < data.length; i++) {
+                    category += "<option value=" + data[i]['id'] + ">" + data[i]['name'] + "</option>";
+                }
+                $('#idCategories option:last').after(category);
+            }
+        })
+    })
 </script>
 
 </html>

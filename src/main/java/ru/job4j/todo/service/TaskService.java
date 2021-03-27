@@ -1,5 +1,6 @@
 package ru.job4j.todo.service;
 
+import ru.job4j.todo.model.Category;
 import ru.job4j.todo.model.Item;
 import ru.job4j.todo.model.User;
 
@@ -7,7 +8,9 @@ import java.util.List;
 
 public interface TaskService {
 
-    Item add(Item item);
+    Item addCategoriesInItem(Item item, String[] ids);
+
+    Item addItemBD(Item item);
 
     List<Item> findAll();
 
@@ -18,4 +21,8 @@ public interface TaskService {
     void createUser(User user);
 
     User findByEmailAndPasswordUser(User user);
+
+    public Category findById(int id);
+
+    public List<Category> AllCategories();
 }

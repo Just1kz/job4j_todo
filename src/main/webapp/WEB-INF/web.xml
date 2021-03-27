@@ -65,4 +65,14 @@
         <url-pattern>/reg</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>CategoryServlet</servlet-name>
+        <servlet-class>ru.job4j.todo.controller.CategoryServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CategoryServlet</servlet-name>
+        <url-pattern>/allCategory</url-pattern>
+    </servlet-mapping>
+
 </web-app>

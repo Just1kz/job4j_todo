@@ -3,6 +3,7 @@ package ru.job4j.todo.model;
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -17,7 +18,8 @@ public class Item {
     private String description;
 
     @Column(name = "created")
-    private Timestamp created;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date created;
 
     @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "author_id")
@@ -38,14 +40,14 @@ public class Item {
 
     public Item(String description, User user) {
         this.description = description;
-        this.created = new Timestamp(System.currentTimeMillis());
+        this.created = new Date(System.currentTimeMillis());
         this.user = user;
         this.done = false;
     }
 
     public Item(String description) {
         this.description = description;
-        this.created = new Timestamp(System.currentTimeMillis());
+        this.created = new Date(System.currentTimeMillis());
         this.user = null;
         this.done = false;
     }
@@ -66,7 +68,11 @@ public class Item {
         this.description = description;
     }
 
-    public Timestamp getCreated() {
+    public void setCreated(Date created) {
+        this.created = created;
+    }
+
+    public Date getCreated() {
         return created;
     }
 

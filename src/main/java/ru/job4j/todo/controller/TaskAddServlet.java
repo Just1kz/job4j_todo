@@ -20,7 +20,7 @@ public class TaskAddServlet extends HttpServlet {
         String description = req.getParameter("description");
         User user = (User) req.getSession().getAttribute("user");
         Item item = new Item(description, user);
-        String[] idCategories = req.getParameterValues("idCategories");
+        String[] idCategories = req.getParameterValues("idCategories[]");
         item = HbmToDo.instOf().addCategoriesInItem(item, idCategories);
         HbmToDo.instOf().addItemBD(item);
     }
